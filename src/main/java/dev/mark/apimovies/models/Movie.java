@@ -15,18 +15,24 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
 
-    private String name;
-    private int year;
+    private String title;
+    private int creation_year;
     private String description;
-    private int running_time;
+    private Long running_time;
     private String genre;
     private String main_actor;
 
     public Movie() {
     }
 
-    public Movie(String name) {
-        this.name = name;
+    public Movie(String title, int creation_year, String description, Long running_time, String genre,
+            String main_actor) {
+        this.title = title;
+        this.creation_year = creation_year;
+        this.description = description;
+        this.running_time = running_time;
+        this.genre = genre;
+        this.main_actor = main_actor;
     }
 
     public Long getId() {
@@ -37,20 +43,20 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getYear() {
-        return year;
+    public int getCreation_year() {
+        return creation_year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setCreation_year(int creation_year) {
+        this.creation_year = creation_year;
     }
 
     public String getDescription() {
@@ -61,11 +67,11 @@ public class Movie {
         this.description = description;
     }
 
-    public int getRunning_time() {
+    public Long getRunning_time() {
         return running_time;
     }
 
-    public void setRunning_time(int running_time) {
+    public void setRunning_time(Long running_time) {
         this.running_time = running_time;
     }
 
@@ -85,4 +91,6 @@ public class Movie {
         this.main_actor = main_actor;
     }
 
+    
+    
 }
