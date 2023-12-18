@@ -29,4 +29,10 @@ public class MovieService {
         return movie;
     }
 
+    public Movie save(Movie movie) {
+        
+        Movie newMovie = repository.save(movie);
+        return newMovie;
+    }
+
 }

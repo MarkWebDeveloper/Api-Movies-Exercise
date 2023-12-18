@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import dev.mark.apimovies.exceptions.movie.MovieException;
 
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Country not found")
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Movie not found")
 public class MovieNotFoundException extends MovieException {
 
     public MovieNotFoundException(String message) {
