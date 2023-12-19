@@ -4,7 +4,7 @@ import java.util.List;
 import dev.mark.apimovies.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import dev.mark.apimovies.exceptions.MovieNotFoundException;
+import dev.mark.apimovies.exceptions.movie.MovieNotFoundException;
 import dev.mark.apimovies.models.Movie;
 
 
@@ -33,6 +33,30 @@ public class MovieService {
         
         Movie newMovie = repository.save(movie);
         return newMovie;
+    }
+
+    public Movie update(Long id, Movie movie) throws Exception {
+        
+        Movie updatingMovie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
+
+        updatingMovie.setTitle(movie.getTitle());
+        updatingMovie.setDescription(movie.getDescription());
+        updatingMovie.setRunning_time(movie.getRunning_time());
+
+        Movie updatedMovie = repository.save(updatingMovie);
+        
+        return updatedMovie;
+    }
+
+    public String delete(Long id) throws Exception {
+        
+        Movie movie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
+
+        repository.delete(movie);
+
+        String message = "The movie is deleted";
+
+        return message;
     }
 
 }
