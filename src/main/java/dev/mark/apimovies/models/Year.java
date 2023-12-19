@@ -1,10 +1,13 @@
 package dev.mark.apimovies.models;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,9 @@ public class Year {
     private Long id;
 
     private Long creation_year;
+
+    @OneToMany(mappedBy = "creation_year")
+    private Set<Movie> movies;
 
     public Year() {
     }
@@ -38,5 +44,5 @@ public class Year {
     public void setCreation_year(Long creation_year) {
         this.creation_year = creation_year;
     }
-    
+
 }
