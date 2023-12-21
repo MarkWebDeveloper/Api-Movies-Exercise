@@ -62,11 +62,9 @@ public class MovieController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Message> remove(@PathVariable("id") Long id) throws Exception { 
 
-        service.delete(id);
+        Message delete = service.delete(id);
 
-        Message message = new Message("The object is deleted");
-
-        return ResponseEntity.status(200).body(message);
+        return ResponseEntity.status(200).body(delete);
     }
 
 }

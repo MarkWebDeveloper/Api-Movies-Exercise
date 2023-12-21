@@ -5,6 +5,7 @@ import dev.mark.apimovies.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import dev.mark.apimovies.exceptions.movie.MovieNotFoundException;
+import dev.mark.apimovies.messages.Message;
 import dev.mark.apimovies.models.Movie;
 
 
@@ -48,13 +49,13 @@ public class MovieService {
         return updatedMovie;
     }
 
-    public String delete(Long id) throws Exception {
+    public Message delete(Long id) throws Exception {
         
         Movie movie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
 
         repository.delete(movie);
 
-        String message = "The movie is deleted";
+        Message message = new Message("The object is deleted");
 
         return message;
     }
