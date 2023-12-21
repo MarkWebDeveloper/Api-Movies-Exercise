@@ -38,12 +38,10 @@ public class MovieService {
     public Movie update(Long id, Movie movie) throws Exception {
         
         Movie updatingMovie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
-
+        
         updatingMovie.setTitle(movie.getTitle());
         updatingMovie.setDescription(movie.getDescription());
         updatingMovie.setRunning_time(movie.getRunning_time());
-        updatingMovie.setCreation_year(movie.getCreation_year());
-
 
         Movie updatedMovie = repository.save(updatingMovie);
         

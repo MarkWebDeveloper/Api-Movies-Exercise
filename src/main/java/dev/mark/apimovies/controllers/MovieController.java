@@ -1,9 +1,7 @@
 package dev.mark.apimovies.controllers;
 
-
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.mark.apimovies.services.MovieService;
-
+import dev.mark.apimovies.messages.Message;
 import dev.mark.apimovies.models.Movie;
 
 @RestController
@@ -62,19 +60,13 @@ public class MovieController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<HttpStatus> remove(@PathVariable("id") Long id) throws Exception { 
+    public ResponseEntity<Message> remove(@PathVariable("id") Long id) throws Exception { 
 
         service.delete(id);
 
-        return new ResponseEntity<>(HttpStatus.valueOf(204));
+        Message message = new Message("The object is deleted");
+
+        return ResponseEntity.status(200).body(message);
     }
-
-    // @DeleteMapping(path = "/{id}")
-    // public String remove(@PathVariable("id") Long id) throws Exception { 
-
-    //     service.delete(id);
-
-    //     return "Deleted succesfully";
-    // }
 
 }
