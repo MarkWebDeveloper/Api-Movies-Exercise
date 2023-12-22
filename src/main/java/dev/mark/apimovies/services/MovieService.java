@@ -11,7 +11,7 @@ import dev.mark.apimovies.models.Movie;
 
 
 @Service
-public class MovieService {
+public class MovieService implements IGenericService<Movie> {
     
     MovieRepository repository;
 

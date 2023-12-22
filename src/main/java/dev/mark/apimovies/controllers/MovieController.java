@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.mark.apimovies.services.IGenericService;
 import dev.mark.apimovies.services.MovieService;
 import dev.mark.apimovies.messages.Message;
 import dev.mark.apimovies.models.Movie;
@@ -21,7 +22,7 @@ import dev.mark.apimovies.models.Movie;
 @RequestMapping(path = "${api-endpoint}/movies")
 public class MovieController {
 
-    MovieService service;
+    IGenericService<Movie> service;
 
     public MovieController(MovieService service) {
         this.service = service;
