@@ -53,9 +53,13 @@ public class MovieService {
         
         Movie movie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
 
+        String movieName = movie.getTitle();
+
         repository.delete(movie);
 
-        Message message = new Message("The object is deleted");
+        Message message = new Message();
+
+        message.setMessage(movieName + " is deleted from the movies table");
 
         return message;
     }
