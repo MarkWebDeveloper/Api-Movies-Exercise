@@ -1,7 +1,9 @@
 package dev.mark.apimovies.services;
 
 import java.util.List;
+
 import dev.mark.apimovies.repositories.MovieRepository;
+
 import org.springframework.stereotype.Service;
 
 import dev.mark.apimovies.exceptions.movie.MovieNotFoundException;
@@ -62,6 +64,12 @@ public class MovieService implements IGenericService<Movie> {
         message.setMessage(movieName + " is deleted from the movies table");
 
         return message;
+    }
+
+    public Movie getByTitle(String title) throws Exception {
+        Movie movie = repository.findByTitle(title).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
+
+        return movie;
     }
 
 }

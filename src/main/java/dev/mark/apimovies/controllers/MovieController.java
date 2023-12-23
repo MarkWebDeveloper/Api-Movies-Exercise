@@ -68,4 +68,12 @@ public class MovieController {
         return ResponseEntity.status(200).body(delete);
     }
 
+    @GetMapping(path = "/bytitle/{title}")
+    public ResponseEntity<Movie> showByTitle(@PathVariable("title") String title) throws Exception {
+
+        Movie movie = service.getByTitle(title);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(movie);
+    }
+
 }
