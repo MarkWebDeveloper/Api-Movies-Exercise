@@ -2,6 +2,8 @@ package dev.mark.apimovies.models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,6 +23,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
     private Set<GenreMovie> genres_movies;
 
@@ -28,6 +31,7 @@ public class Movie {
     private String description;
     private Long running_time;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "year_id", nullable = true)
     private Year creation_year;
@@ -35,11 +39,16 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, String description, Long running_time) {
+    public Movie(Set<GenreMovie> genres_movies, String title, String description, Long running_time,
+            Year creation_year) {
+        this.genres_movies = genres_movies;
         this.title = title;
         this.description = description;
         this.running_time = running_time;
+        this.creation_year = creation_year;
     }
+
+
 
     public Long getId() {
         return id;

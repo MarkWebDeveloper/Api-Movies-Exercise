@@ -2,6 +2,8 @@ package dev.mark.apimovies.models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +20,7 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_genre")
     private Long id;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "genre", fetch = FetchType.EAGER)
     private Set<GenreMovie> genres_movies;
 
@@ -26,8 +29,9 @@ public class Genre {
     public Genre() {
     }
 
-    public Genre(String name) {
-        this.genre_name = name;
+    public Genre(Set<GenreMovie> genres_movies, String genre_name) {
+        this.genres_movies = genres_movies;
+        this.genre_name = genre_name;
     }
 
     public Long getId() {
@@ -45,5 +49,15 @@ public class Genre {
     public void setGenre_name(String genre_name) {
         this.genre_name = genre_name;
     }
+
+    public Set<GenreMovie> getGenres_movies() {
+        return genres_movies;
+    }
+
+    public void setGenres_movies(Set<GenreMovie> genres_movies) {
+        this.genres_movies = genres_movies;
+    }
+
+    
     
 }
