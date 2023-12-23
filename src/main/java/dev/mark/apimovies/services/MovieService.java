@@ -10,8 +10,7 @@ import dev.mark.apimovies.exceptions.movie.MovieNotFoundException;
 import dev.mark.apimovies.messages.Message;
 import dev.mark.apimovies.models.Movie;
 
-
-
+// @Service nos sirve para marcar un servicio. El servicio contiene las funciones para manipular el repositorio. Estas funciones se definen aquí para luego ser usadas dentro de los controladores.
 @Service
 public class MovieService implements IGenericService<Movie> {
     
@@ -20,12 +19,12 @@ public class MovieService implements IGenericService<Movie> {
     public MovieService(MovieRepository repository) {
         this.repository = repository;
     }
-
+// findAll() es un método que existe por defecto en JpaRepository. Otras funciones estándares que usamos aquí son getById, save, y delete.
     public List<Movie> getAll() {
         List<Movie> movies = repository.findAll();
         return movies;
     }
-
+// MovieNotFoundException es una excepción creada por nosotros que se lanza en el caso de que la película con el id introducido no existe.
     public Movie getById(Long id) throws Exception {
         Movie movie = repository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie not found"));
 

@@ -13,15 +13,20 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+// @Entity nos sirve para marcar un modelo.
 @Entity
+// @Table nos crea una tabla.
 @Table(name = "movies")
 public class Movie {
-    
+// @Id marca que el siguiente dato es la clave primaria de tipo id. @GeneratedValue significa que se asigna automáticamente. @Column nos aclara que es una columna y nos permite llamarla de cualquier manera.
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
 
+// @ManyToMany nos marca la relación de muchos a muchos.  
     @ManyToMany
+// @JoinTable sirve para crear nueva tabla. En nuestro caso es una tabla intermedia para la relacion de muchos a muchos. La tabla tiene nombre genres-movies y dos columnas - movie-id y genre-id. JoinColumns y inverseJoinColumns nos marcan los dos lados de asociación de la tabla intermedia. 
     @JoinTable(
         name = "genres_movies",
         joinColumns = @JoinColumn(name = "movie_id"),
@@ -31,7 +36,7 @@ public class Movie {
     private String title;
     private String description;
     private Long running_time;
-
+// nullable = true significa que si no añadimos ningún valor, year-id va a ser igual a null
     @ManyToOne
     @JoinColumn(name = "year_id", nullable = true)
     private Year creation_year;
