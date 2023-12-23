@@ -1,13 +1,13 @@
 package dev.mark.apimovies.models;
 
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +17,8 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_genre")
     private Long id;
 
-    @ManyToMany(mappedBy = "genres")
-    private List<Movie> movies;
+    @OneToMany(mappedBy = "genre")
+    private Set<GenreMovie> genres_movies;
 
     private String genre_name;
 

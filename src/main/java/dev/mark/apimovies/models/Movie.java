@@ -8,9 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,12 +20,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-        name = "genres_movies",
-        joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private Set<Genre> genres;
+    @OneToMany(mappedBy = "movie")
+    private Set<GenreMovie> genres_movies;
 
     private String title;
     private String description;
@@ -53,12 +48,12 @@ public class Movie {
         this.id = id;
     }
 
-    public Set<Genre> getGenres() {
-        return genres;
+    public Set<GenreMovie> getGenres_movies() {
+        return genres_movies;
     }
 
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
+    public void setGenres_movies(Set<GenreMovie> genres_movies) {
+        this.genres_movies = genres_movies;
     }
 
     public String getTitle() {
@@ -92,5 +87,7 @@ public class Movie {
     public void setCreation_year(Year creation_year) {
         this.creation_year = creation_year;
     }
+
     
+
 }
