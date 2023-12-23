@@ -4,6 +4,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER)
     private Set<GenreMovie> genres_movies;
 
     private String title;

@@ -17,11 +17,11 @@ public class GenreMovie {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", nullable = true)
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "genre_id")
+    @JoinColumn(name = "genre_id", nullable = true)
     private Genre genre;
 
     public GenreMovie() {
