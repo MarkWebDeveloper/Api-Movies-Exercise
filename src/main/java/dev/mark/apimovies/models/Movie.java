@@ -1,11 +1,15 @@
 package dev.mark.apimovies.models;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -16,6 +20,13 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_movie")
     private Long id;
+
+    @ManyToMany
+    @JoinTable(
+        name = "genres_movies",
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<Genre> genres;
 
     private String title;
     private String description;
@@ -40,6 +51,14 @@ public class Movie {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 
     public String getTitle() {
